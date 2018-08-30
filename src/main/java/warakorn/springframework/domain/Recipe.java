@@ -16,7 +16,7 @@ public @Data class Recipe {
     private String description;
     private Integer prepTime;
     private Integer cookTime;
-    private Integer services;
+    private Integer servings;
     private String source;
     private String url;
 
