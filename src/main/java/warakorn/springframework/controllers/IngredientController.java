@@ -4,7 +4,6 @@ import org.springframework.web.bind.annotation.*;
 import warakorn.springframework.commands.IngredientCommand;
 import warakorn.springframework.commands.RecipeCommand;
 import warakorn.springframework.commands.UnitOfMeasureCommand;
-import warakorn.springframework.domain.UnitOfMeasure;
 import warakorn.springframework.services.IngredientService;
 import warakorn.springframework.services.RecipeService;
 import lombok.extern.slf4j.Slf4j;
@@ -83,5 +82,12 @@ public class IngredientController {
         log.debug("saved ingredient id:" + savedCommand.getId());
 
         return "redirect:/recipe/" + savedCommand.getRecipeId() + "/ingredient/" + savedCommand.getId() + "/show";
+    }
+
+    @GetMapping("recipe/{recipeId}/ingredient/{ingredientId}/delete")
+    public String deleteIngredient(@PathVariable String ingredientId, @PathVariable String recipeId) {
+        log.debug("delete ingredient id: " + ingredientId);
+        ingredientService.deleteById(Long.valueOf(recipeId), Long.valueOf(ingredientId));
+        return "redirect:/recipe/" + recipeId + "/ingredients";
     }
 }
